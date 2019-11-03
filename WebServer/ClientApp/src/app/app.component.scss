@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 600px;
+  margin: 60px;
+}
+
+.file-selector {
+  width: 30%;
+}
+
+.file-data {
+  margin-left: 10px;
+  width: 70%;
+}

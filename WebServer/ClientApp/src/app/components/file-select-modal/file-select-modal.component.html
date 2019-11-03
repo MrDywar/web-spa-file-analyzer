@@ -1,0 +1,48 @@
+<div mat-dialog-content>
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node
+      *matTreeNodeDef="let flatNode"
+      matTreeNodePadding
+      (click)="onSelectFile(flatNode)"
+      [ngClass]="{
+        'is-active': flatNode.isSelected
+      }"
+    >
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled></button>
+      {{ flatNode.value.name }}
+    </mat-tree-node>
+
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node
+      *matTreeNodeDef="let flatNode; when: hasChild"
+      matTreeNodePadding
+    >
+      <button
+        mat-icon-button
+        matTreeNodeToggle
+        [attr.aria-label]="'toggle ' + flatNode.value.name"
+      >
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{
+            treeControl.isExpanded(flatNode) ? 'expand_more' : 'chevron_right'
+          }}
+        </mat-icon>
+      </button>
+      {{ flatNode.value.name }}
+    </mat-tree-node>
+  </mat-tree>
+</div>
+
+<div mat-dialog-actions class="buttons">
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="selectedFlatNode?.value.fullName"
+    color="primary"
+    cdkFocusInitial
+  >
+    Ок
+  </button>
+</div>

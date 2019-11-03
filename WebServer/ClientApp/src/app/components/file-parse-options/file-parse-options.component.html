@@ -1,0 +1,59 @@
+<form [formGroup]="form">
+  <div class="form-group">
+    <div class="form-group-key">File path</div>
+    <div class="form-group-value">
+      <mat-form-field>
+        <input matInput formControlName="filePath" />
+        <mat-error *ngIf="form.controls['filePath'].invalid && form.invalid"
+          >Please select the file</mat-error
+        >
+      </mat-form-field>
+      <button mat-raised-button (click)="openDialog()">...</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="form-group-key"></div>
+    <div class="form-group-value">
+      <mat-checkbox formControlName="hasHeaders"
+        >First row contains headers</mat-checkbox
+      >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="form-group-key">Column delimiter</div>
+    <div class="form-group-value">
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        formControlName="columnDelimiterType"
+        class="radio-group"
+      >
+        <mat-radio-button class="radio-button" [value]="0">
+          Tab
+        </mat-radio-button>
+        <mat-radio-button class="radio-button" [value]="1">
+          White space
+        </mat-radio-button>
+        <mat-radio-button class="radio-button" [value]="2">
+          Semicolon
+        </mat-radio-button>
+        <mat-radio-button class="radio-button" [value]="3">
+          Other
+          <mat-form-field>
+            <input matInput formControlName="customColumnDelimiter" />
+          </mat-form-field>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="form-group-key"></div>
+    <div class="form-group-value">
+      <button mat-raised-button color="primary" (click)="readFile()">
+        Parse
+      </button>
+    </div>
+  </div>
+</form>

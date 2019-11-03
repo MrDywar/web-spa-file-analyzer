@@ -1,0 +1,52 @@
+<div *ngIf="fileData">
+  <div>File name: {{ fileData.fullName }}</div>
+
+  <div class="table table-header">
+    <div class="cell title">Columns:</div>
+    <mat-form-field
+      class="cell"
+      *ngFor="
+        let header of fileData.headers;
+        index as rowNumber;
+        trackBy: trackByFn
+      "
+    >
+      <input type="text" matInput [(ngModel)]="fileData.headers[rowNumber]" />
+    </mat-form-field>
+  </div>
+
+  <div class="table table-data">
+    <div class="data-row">
+      <div
+        *ngFor="let header of fileData.headers; index as rowNumber"
+        class="cell title"
+      >
+        {{ fileData.headers[rowNumber] }}
+      </div>
+    </div>
+    <div
+      *ngFor="let row of fileData.rows; index as rowNumber; trackBy: trackByFn"
+      class="data-row"
+    >
+      <mat-form-field
+        *ngFor="let column of row; index as columnNumber; trackBy: trackByFn"
+        class="cell"
+      >
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="fileData.rows[rowNumber][columnNumber]"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" class="button" (click)="addRow()">
+      Add new row
+    </button>
+    <button mat-raised-button color="primary" class="button" (click)="save()">
+      Save
+    </button>
+  </div>
+</div>

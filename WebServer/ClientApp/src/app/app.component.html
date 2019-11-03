@@ -1,0 +1,10 @@
+<div class="mat-app-background container">
+  <mat-card class="file-selector">
+    <app-file-parse-options
+      (fileParsed)="onFileParsed($event)"
+    ></app-file-parse-options>
+  </mat-card>
+  <mat-card class="file-data">
+    <app-file-data-editor [fileData]="fileData"></app-file-data-editor>
+  </mat-card>
+</div>

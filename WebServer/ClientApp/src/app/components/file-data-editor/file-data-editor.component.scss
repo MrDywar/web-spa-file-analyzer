@@ -1,0 +1,50 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+  .title {
+    background-color: lightgray;
+  }
+
+  .cell {
+    padding: 0 5px;
+    height: 40px;
+    width: 100%;
+    display: grid;
+    align-items: center;
+
+    ::ng-deep .mat-form-field-infix {
+      border-top: 0.24375em solid transparent;
+    }
+  }
+}
+
+.table-header {
+  max-height: 200px;
+  width: 300px;
+  margin-bottom: 20px;
+  overflow-y: scroll;
+
+  .cell {
+    width: auto;
+  }
+}
+
+.table-data {
+  max-height: 300px;
+  overflow: scroll;
+
+  .data-row {
+    display: flex;
+  }
+}
+
+.buttons {
+  margin-top: 20px;
+
+  .button + .button {
+    margin-left: 20px;
+  }
+}
