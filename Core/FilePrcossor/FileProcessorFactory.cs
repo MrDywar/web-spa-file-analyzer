@@ -17,7 +17,7 @@ namespace Core.FilePrcossor
 
         public IFileProcessor Create(string fileExtension)
         {
-            switch (fileExtension.ToLower())
+            switch (fileExtension?.ToLower())
             {
                 case TextFileExtension:
                     return new TextFileProcessor();
