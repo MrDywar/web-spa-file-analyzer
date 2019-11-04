@@ -21,7 +21,7 @@ How to install and run:
 Angular app placed in "WebServer\ClientApp", outputPath is "../Scripts/Angular".
 
 For test project simplicity the following things not implemented/ignored:
-- No tests (FE, BE), no validation.
+- No tests (FE, BE), no validation. (part of it implementing in "add-core-unit-tests" branch)
 - The files catalog is given whole at once, without dynamic loading.
 - Reading and writing files is performed without concurrent access locks.
 - Reading the file directory and file data are synchronous.
