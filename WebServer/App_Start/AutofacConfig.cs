@@ -24,6 +24,7 @@ namespace WebServer.App_Start
 
             builder.RegisterType<FileService>().As<IFileService>().SingleInstance();
             builder.RegisterType<FileProcessorFactory>().As<IFileProcessorFactory>().SingleInstance();
+            builder.RegisterType<WebConfigConfigurationManager>().As<IConfigurationManager>().SingleInstance();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

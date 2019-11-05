@@ -12,17 +12,22 @@ namespace Core
 {
     public class FileService : IFileService
     {
-        private readonly string rootFolderPath = HostingEnvironment.MapPath("~/App_Data");
-        private readonly IFileProcessorFactory _fileProcessorFactory;
+        private readonly string ROOT_FOLDER_PATH;
 
-        public FileService(IFileProcessorFactory fileProcessorFactory)
+        private readonly IFileProcessorFactory _fileProcessorFactory;
+        private readonly IConfigurationManager _configurationManager;
+
+        public FileService(IFileProcessorFactory fileProcessorFactory, IConfigurationManager configurationManager)
         {
             _fileProcessorFactory = fileProcessorFactory;
+            _configurationManager = configurationManager;
+
+            ROOT_FOLDER_PATH = configurationManager.GetRootFolderPath();
         }
 
         public Task<List<FileNodeDto>> GetAll()
         {
-            return Task.FromResult(BuildFilesTree(rootFolderPath));
+            return Task.FromResult(BuildFilesTree(ROOT_FOLDER_PATH));
         }
 
         public async Task<FileDataDto> GetData(FileParseOptionsDto parseOptions)
@@ -43,7 +48,7 @@ namespace Core
 
         private void CheckRootPath(string fileFullName)
         {
-            if (!fileFullName.StartsWith(rootFolderPath, StringComparison.OrdinalIgnoreCase))
+            if (!fileFullName.StartsWith(ROOT_FOLDER_PATH, StringComparison.OrdinalIgnoreCase))
                 throw new Exception();
         }
 
@@ -85,7 +90,7 @@ namespace Core
                 var files = Directory.GetFiles(currentDir.FullName);
                 foreach (string item in files)
                 {
-                    currentDir.Children.Add(new FileNodeDto() 
+                    currentDir.Children.Add(new FileNodeDto()
                     {
                         Name = GetLastStringAfterDelimiter(item, "\\"),
                         FullName = item,
