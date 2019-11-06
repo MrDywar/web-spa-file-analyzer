@@ -47,6 +47,7 @@
     <Compile Include="FilePrcossor\IFileProcessorFactory.cs" />
     <Compile Include="FilePrcossor\TextFileProcessor.cs" />
     <Compile Include="FileService.cs" />
+    <Compile Include="IConfigurationManager.cs" />
     <Compile Include="IFileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

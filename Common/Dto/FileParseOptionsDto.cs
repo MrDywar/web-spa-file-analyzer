@@ -11,5 +11,10 @@ namespace Common.Dto
         public string FullName { get; set; }
         public bool HasHeaders { get; set; }
         public string Delimiter { get; set; }
+
+        public override string ToString()
+        {
+            return $"FullName: {FullName}, Delimiter: {Delimiter}, HasHeaders: {HasHeaders}";
+        }
     }
 }

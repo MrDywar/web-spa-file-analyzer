@@ -12,8 +12,7 @@ namespace Core.FilePrcossor
     {
         public Task<FileDataDto> Read(FileParseOptionsDto parseOptions)
         {
-            if (!File.Exists(parseOptions.FullName))
-                throw new Exception();
+            CheckFileExist(parseOptions.FullName);
 
             var result = new FileDataDto()
             {
@@ -43,6 +42,8 @@ namespace Core.FilePrcossor
 
         public async Task Update(FileDataDto fileData)
         {
+            CheckFileExist(fileData.FullName);
+
             var strBuilder = new StringBuilder();
             strBuilder.AppendLine(string.Join(fileData.Delimiter, fileData.Headers));
 
@@ -53,6 +54,12 @@ namespace Core.FilePrcossor
             {
                 await writer.WriteAsync(strBuilder.ToString());
             }
+        }
+
+        private static void CheckFileExist(string fileFullName)
+        {
+            if (!File.Exists(fileFullName))
+                throw new FileNotFoundException();
         }
     }
 }
