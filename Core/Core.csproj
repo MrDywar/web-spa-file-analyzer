@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.5.1\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DtoValidators\FileDataDtoValidator.cs" />
+    <Compile Include="DtoValidators\FileParseOptionsDtoValidator.cs" />
+    <Compile Include="DtoValidators\Validator.cs" />
     <Compile Include="FilePrcossor\FileProcessorFactory.cs" />
     <Compile Include="FilePrcossor\IFileProcessor.cs" />
     <Compile Include="FilePrcossor\IFileProcessorFactory.cs" />
@@ -56,6 +66,10 @@
       <Project>{3273f0f7-7133-45ec-9fb0-0ae10dcfe2e7}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

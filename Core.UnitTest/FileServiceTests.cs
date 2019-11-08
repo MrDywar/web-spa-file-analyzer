@@ -73,6 +73,17 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
+        [DynamicData(nameof(GetInvalidFileParseOptionsDto), DynamicDataSourceType.Method)]
+        public async Task GetData_InvalidDto_ThrowException(FileParseOptionsDto value)
+        {
+            var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH);
+
+            Func<Task<FileDataDto>> act = () => fileService.GetData(value);
+
+            await Assert.ThrowsExceptionAsync<Exception>(act);
+        }
+
+        [TestMethod]
         public async Task GetData_ValidFile_ReturnsFileData()
         {
             var parseOptions = new FileParseOptionsDto()
@@ -82,7 +93,7 @@ namespace Core.UnitTest
 
             var expectedData = new FileDataDto()
             {
-                FullName = $"{TEST_ROOT_FOLDER_PATH}\\text.txt",
+                FullName = $"{TEST_ROOT_FOLDER_PATH}\\text.txt"
             };
 
             var fileProcFactory = new Mock<IFileProcessorFactory>();
@@ -126,11 +137,23 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
+        [DynamicData(nameof(GetInvalidFileDataDto), DynamicDataSourceType.Method)]
+        public async Task UpdateData_InvalidDto_ThrowException(FileDataDto value)
+        {
+            var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH);
+
+            Func<Task> act = () => fileService.UpdateData(value);
+
+            await Assert.ThrowsExceptionAsync<Exception>(act);
+        }
+
+        [TestMethod]
         public async Task UpdateData_ValidFile_ReturnsTask()
         {
             var fileData = new FileDataDto()
             {
                 FullName = $"{TEST_ROOT_FOLDER_PATH}\\text.txt",
+                Headers = new List<string>() { "test" }
             };
 
             var fileProcFactory = new Mock<IFileProcessorFactory>();
@@ -200,22 +223,32 @@ namespace Core.UnitTest
         public static IEnumerable<object[]> GetInvalidExtensionsFileParseOptionsDto()
         {
             yield return new object[] {
-                new FileParseOptionsDto()
-                {
-                    FullName = $"{TEST_ROOT_FOLDER_PATH}\\text",
-                }
+                new FileParseOptionsDto() { FullName = $"{TEST_ROOT_FOLDER_PATH}\\t" }
             };
             yield return new object[] {
-                new FileParseOptionsDto()
-                {
-                    FullName = $"{TEST_ROOT_FOLDER_PATH}\\text.tessgsdtge",
-                }
+                new FileParseOptionsDto() { FullName = $"{TEST_ROOT_FOLDER_PATH}\\t.zzzzzz" }
             };
             yield return new object[] {
-                new FileParseOptionsDto()
-                {
-                    FullName = $"{TEST_ROOT_FOLDER_PATH}\\text.....",
-                }
+                new FileParseOptionsDto() { FullName = $"{TEST_ROOT_FOLDER_PATH}\\t....." }
+            };
+        }
+
+        public static IEnumerable<object[]> GetInvalidFileParseOptionsDto()
+        {
+            yield return new object[] { null };
+            yield return new object[] {
+                new FileParseOptionsDto() { FullName = null }
+            };
+        }
+
+        public static IEnumerable<object[]> GetInvalidFileDataDto()
+        {
+            yield return new object[] { null };
+            yield return new object[] {
+                new FileDataDto() { FullName = null }
+            };
+            yield return new object[] {
+                new FileDataDto() { FullName = "a" }
             };
         }
     }

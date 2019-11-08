@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Hosting;
 using Common.Dto;
+using Core.DtoValidators;
 using Core.FilePrcossor;
+using FluentValidation;
 
 namespace Core
 {
@@ -32,6 +34,8 @@ namespace Core
 
         public async Task<FileDataDto> GetData(FileParseOptionsDto parseOptions)
         {
+            FileParseOptionsDtoValidator.ValidateAndThrow(parseOptions);
+
             CheckRootPath(parseOptions.FullName);
             var fileProcessor = GetFileProcessor(parseOptions.FullName);
 
@@ -40,6 +44,8 @@ namespace Core
 
         public async Task UpdateData(FileDataDto fileData)
         {
+            FileDataDtoValidator.ValidateAndThrow(fileData);
+
             CheckRootPath(fileData.FullName);
             var fileProcessor = GetFileProcessor(fileData.FullName);
 
