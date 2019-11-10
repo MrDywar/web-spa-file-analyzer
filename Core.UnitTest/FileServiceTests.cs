@@ -16,30 +16,30 @@ namespace Core.UnitTest
         private const string TEST_ROOT_FOLDER_PATH = @"C:\f1\f2";
 
         [TestMethod]
-        [DeploymentItem("TestFiles", "App_Data")]
         public async Task GetAll_DefaultRootFolder_ReturnsFolderTree()
         {
+            var path = TestHelper.PATH_TO_TESTFILES;
             var expectedTree = new List<FileNodeDto>()
             {
-                new FileNodeDto(@"App_Data\A", "A", true)
+                new FileNodeDto($"{path}\\A", "A", true)
                 {
                     Children = new List<FileNodeDto>()
                     {
-                        new FileNodeDto(@"App_Data\A\A1", "A1", true)
+                        new FileNodeDto($"{path}\\A\\A1", "A1", true)
                         {
                             Children = new List<FileNodeDto>()
                             {
-                                new FileNodeDto(@"App_Data\A\A1\A1.txt", "A1.txt", false)
+                                new FileNodeDto($"{path}\\A\\A1\\A1.txt", "A1.txt", false)
                             }
                         },
-                        new FileNodeDto(@"App_Data\A\A.txt", "A.txt", false)
+                        new FileNodeDto($"{path}\\A\\A.txt", "A.txt", false)
                     }
                 },
-                new FileNodeDto(@"App_Data\empty.txt", "empty.txt", false),
-                new FileNodeDto(@"App_Data\tab_file.txt", "tab_file.txt", false)
+                new FileNodeDto($"{path}\\empty.txt", "empty.txt", false),
+                new FileNodeDto($"{path}\\tab_file.txt", "tab_file.txt", false)
             };
 
-            var fileService = CreateFileService("App_Data");
+            var fileService = CreateFileService(path);
 
             var tree = await fileService.GetAll();
 

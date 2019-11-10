@@ -4,11 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Hosting;
 using Common.Dto;
 using Core.DtoValidators;
 using Core.FilePrcossor;
-using FluentValidation;
 
 namespace Core
 {

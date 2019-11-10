@@ -241,11 +241,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{3273f0f7-7133-45ec-9fb0-0ae10dcfe2e7}</Project>
+      <Project>{a31c96f5-5ce0-4033-bf73-a262e30d1a25}</Project>
       <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{cc384fb6-802a-4b01-b26e-7c4dcd44f2f1}</Project>
+      <Project>{cc1c8174-1c6e-4204-9cd2-266efd10cab4}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
