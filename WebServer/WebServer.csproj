@@ -165,12 +165,6 @@
     <Content Include="App_Data\semicolon_file_01.txt" />
     <Content Include="App_Data\tab_file_02.txt" />
     <Content Include="App_Data\whitespace_file_01.txt" />
-    <Content Include="ClientApp\src\app\app.component.html" />
-    <Content Include="ClientApp\src\app\components\file-data-editor\file-data-editor.component.html" />
-    <Content Include="ClientApp\src\app\components\file-parse-options\file-parse-options.component.html" />
-    <Content Include="ClientApp\src\app\components\file-select-modal\file-select-modal.component.html" />
-    <Content Include="ClientApp\src\favicon.ico" />
-    <Content Include="ClientApp\src\index.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -192,42 +186,10 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientApp\.gitignore" />
-    <Content Include="ClientApp\angular.json" />
-    <Content Include="ClientApp\browserslist" />
-    <Content Include="ClientApp\package-lock.json" />
-    <Content Include="ClientApp\package.json" />
-    <Content Include="ClientApp\README.md" />
-    <Content Include="ClientApp\src\app\app.component.scss" />
-    <Content Include="ClientApp\src\assets\.gitkeep" />
-    <Content Include="ClientApp\src\styles.scss" />
-    <Content Include="ClientApp\tsconfig.app.json" />
-    <Content Include="ClientApp\tsconfig.json" />
-    <Content Include="ClientApp\src\app\components\file-data-editor\file-data-editor.component.scss" />
-    <Content Include="ClientApp\src\app\components\file-parse-options\file-parse-options.component.scss" />
-    <Content Include="ClientApp\src\app\components\file-select-modal\file-select-modal.component.scss" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\app.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\app.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\file-data-editor\file-data-editor.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\file-parse-options\file-parse-options.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\file-select-modal\file-select-modal.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\file-select-modal\flat-node.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dtos\file-data-dto.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dtos\file-node-dto.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dtos\file-parse-options-dto.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\enums\column-delimiter-type.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\base-data.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\file-data.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="ClientApp\src\environments\environment.ts" />
-    <TypeScriptCompile Include="ClientApp\src\main.ts" />
-    <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.3\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
