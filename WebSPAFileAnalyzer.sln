@@ -7,11 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer", "WebServer\WebS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{71F672CA-82AD-4709-BACC-56EF0390F9D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{A31C96F5-5CE0-4033-BF73-A262E30D1A25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{A31C96F5-5CE0-4033-BF73-A262E30D1A25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{CC1C8174-1C6E-4204-9CD2-266EFD10CAB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{CC1C8174-1C6E-4204-9CD2-266EFD10CAB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.UnitTest", "Core.UnitTest\Core.UnitTest.csproj", "{92C80BB7-CC47-4697-982C-E41831F6BD6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.UnitTest", "Core.UnitTest\Core.UnitTest.csproj", "{92C80BB7-CC47-4697-982C-E41831F6BD6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServerCore", "WebServerCore\WebServerCore.csproj", "{28495AAB-DEE2-4121-81E1-51977EC6ADC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{92C80BB7-CC47-4697-982C-E41831F6BD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92C80BB7-CC47-4697-982C-E41831F6BD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92C80BB7-CC47-4697-982C-E41831F6BD6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28495AAB-DEE2-4121-81E1-51977EC6ADC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28495AAB-DEE2-4121-81E1-51977EC6ADC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28495AAB-DEE2-4121-81E1-51977EC6ADC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28495AAB-DEE2-4121-81E1-51977EC6ADC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
