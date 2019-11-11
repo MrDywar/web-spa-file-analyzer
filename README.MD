@@ -3,7 +3,7 @@
 This is a simple web spa application. The user can browse, read and modify text files located on the server. Text files store tabular data using various column delimiters. This solution does not use SQL or NoSQL.
 
 Used frameworks:
-- ASP.NET MVC 5/Web API 2
+- ASP.NET MVC 5, Web API 2
 - ASP.NET Core
 - Angular 8
 
