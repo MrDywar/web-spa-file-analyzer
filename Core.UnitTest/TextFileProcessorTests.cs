@@ -15,11 +15,8 @@ namespace Core.UnitTest
     {
         private IFileProcessor _fileProcessor;
 
-        private const string EMPTY_TEXTFILE_PATH = @"TestFiles\empty.txt";
-        private const string EMPTY_TEXTFILE_NAME = "empty.txt";
-
-        private const string TAB_TEXTFILE_PATH = @"TestFiles\tab_file.txt";
-        private const string TAB_TEXTFILE_NAME = "tab_file.txt";
+        private readonly string EMPTY_TEXTFILE_PATH = $"{TestHelper.PATH_TO_TESTFILES}\\empty.txt";
+        private readonly string TAB_TEXTFILE_PATH = $"{TestHelper.PATH_TO_TESTFILES}\\tab_file.txt";
 
         [TestInitialize]
         public void Setup()
@@ -28,19 +25,18 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        [DeploymentItem(EMPTY_TEXTFILE_PATH)]
         public async Task Read_EmptyTextFile_ReturnsEmptyFileData()
         {
             var parseOptions = new FileParseOptionsDto()
             {
-                FullName = EMPTY_TEXTFILE_NAME,
+                FullName = EMPTY_TEXTFILE_PATH,
                 Delimiter = " ",
                 HasHeaders = false
             };
 
             var expectedData = new FileDataDto()
             {
-                FullName = EMPTY_TEXTFILE_NAME,
+                FullName = EMPTY_TEXTFILE_PATH,
                 Delimiter = " "
             };
 
@@ -50,19 +46,18 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        [DeploymentItem(TAB_TEXTFILE_PATH)]
         public async Task Read_TextFileWithHeaders_ReturnsFileData()
         {
             var parseOptions = new FileParseOptionsDto()
             {
-                FullName = TAB_TEXTFILE_NAME,
+                FullName = TAB_TEXTFILE_PATH,
                 Delimiter = "\t",
                 HasHeaders = true
             };
 
             var expectedData = new FileDataDto()
             {
-                FullName = TAB_TEXTFILE_NAME,
+                FullName = TAB_TEXTFILE_PATH,
                 Delimiter = "\t",
                 Headers = new List<string>() { "Name", "Site", "Email" },
                 Rows = new List<string[]>()
@@ -79,19 +74,18 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        [DeploymentItem(TAB_TEXTFILE_PATH)]
         public async Task Read_TextFileWithoutHeaders_ReturnsFileDataWithCustomHeaders()
         {
             var parseOptions = new FileParseOptionsDto()
             {
-                FullName = TAB_TEXTFILE_NAME,
+                FullName = TAB_TEXTFILE_PATH,
                 Delimiter = "\t",
                 HasHeaders = false
             };
 
             var expectedData = new FileDataDto()
             {
-                FullName = TAB_TEXTFILE_NAME,
+                FullName = TAB_TEXTFILE_PATH,
                 Delimiter = "\t",
                 Headers = new List<string>() { "col_0", "col_1", "col_2" },
                 Rows = new List<string[]>()
@@ -124,12 +118,14 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        [DeploymentItem(TAB_TEXTFILE_PATH)]
         public async Task Update_TextFile_OverwriteFileAndReturnsTask()
         {
+            string tempFile = Path.Combine(Path.GetTempPath(), $"temp_file_{Guid.NewGuid().ToString()}.txt");
+            File.WriteAllText(tempFile, string.Empty);
+
             var firstDataToWrite = new FileDataDto()
             {
-                FullName = TAB_TEXTFILE_NAME,
+                FullName = tempFile,
                 Delimiter = "\t",
                 Headers = new List<string>() { "1", "2" },
                 Rows = new List<string[]>()
@@ -140,7 +136,7 @@ namespace Core.UnitTest
 
             var secondDataToWrite = new FileDataDto()
             {
-                FullName = TAB_TEXTFILE_NAME,
+                FullName = tempFile,
                 Delimiter = "\t",
                 Headers = new List<string>() { "COL_1", "COL_2" },
                 Rows = new List<string[]>()
@@ -152,7 +148,7 @@ namespace Core.UnitTest
 
             var parseOptions = new FileParseOptionsDto()
             {
-                FullName = TAB_TEXTFILE_NAME,
+                FullName = tempFile,
                 Delimiter = "\t",
                 HasHeaders = true
             };
@@ -160,6 +156,8 @@ namespace Core.UnitTest
             await _fileProcessor.Update(firstDataToWrite);
             await _fileProcessor.Update(secondDataToWrite);
             var resultData = await _fileProcessor.Read(parseOptions);
+
+            File.Delete(tempFile);
 
             Assert.IsTrue(IsFileDataDtoEquals(resultData, secondDataToWrite));
         }
