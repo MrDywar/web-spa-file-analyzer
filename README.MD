@@ -3,8 +3,8 @@
 This is a simple web spa application. The user can browse, read and modify text files located on the server. Text files store tabular data using various column delimiters. This solution does not use SQL or NoSQL.
 
 Used frameworks:
-- ASP.NET MVC 5
-- Web API 2
+- ASP.NET MVC 5/Web API 2
+- ASP.NET Core
 - Angular 8
 
 Used dev tools:
@@ -13,15 +13,15 @@ Used dev tools:
 - Node.js
 
 How to install and run:
-- resolve .net dependencies
-- resolve angular dependencies (npm i)
-- build Angular (npm run build)
-- run web app (F5).
+- resolve .net dependencies.
+- resolve angular dependencies (npm i).
+- build Angular (npm run build). Note that angular.json "outputPath" by default is configured to .net core - "../WebServerCore/wwwroot/", if you wont to build Angular for MVC 5, change it to - "../WebServer/Scripts/Angular/".
+- set startup project, and hit run (F5).
 
-Angular app placed in "WebServer\ClientApp", outputPath is "../Scripts/Angular".
+Angular app stored in "ClientWebApp".
 
 For test project simplicity the following things not implemented/ignored:
-- No tests (FE, BE), no validation. (part of it implementing in "add-core-unit-tests" branch)
+- No tests (FE, BE), no validation.
 - The files catalog is given whole at once, without dynamic loading.
 - Reading and writing files is performed without concurrent access locks.
 - Reading the file directory and file data are synchronous.
