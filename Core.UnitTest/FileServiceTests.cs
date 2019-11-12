@@ -1,6 +1,7 @@
 ﻿using Common.Dto;
 using Common.Exceptions;
-using Core.FilePrcossor;
+using Core.FileProcessor;
+using Core.Implementation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;

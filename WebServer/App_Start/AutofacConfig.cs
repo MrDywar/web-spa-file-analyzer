@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Core;
-using Core.FilePrcossor;
+using Core.FileProcessor;
+using Core.Implementation;
+using Core.Implementation.FileProcessor;
 using System;
 using System.Collections.Generic;
 using System.Linq;

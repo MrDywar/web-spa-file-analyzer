@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Dto;
+using Core.FileProcessor;
 
-namespace Core.FilePrcossor
+namespace Core.Implementation.FileProcessor
 {
     public class TextFileProcessor : IFileProcessor
     {

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Exceptions;
-using Core.FilePrcossor;
+using Core.FileProcessor;
+using Core.Implementation.FileProcessor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Core.UnitTest

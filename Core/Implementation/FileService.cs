@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Common.Dto;
 using Common.Exceptions;
 using Core.DtoValidators;
-using Core.FilePrcossor;
+using Core.FileProcessor;
 
-namespace Core
+namespace Core.Implementation
 {
     public class FileService : IFileService
     {
