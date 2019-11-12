@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.FilePrcossor
+namespace Core.FileProcessor
 {
     public interface IFileProcessor
     {

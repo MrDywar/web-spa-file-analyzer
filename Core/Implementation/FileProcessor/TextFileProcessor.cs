@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Dto;
+using Core.FileProcessor;
 
-namespace Core.FilePrcossor
+namespace Core.Implementation.FileProcessor
 {
     public class TextFileProcessor : IFileProcessor
     {
@@ -59,7 +60,7 @@ namespace Core.FilePrcossor
         private static void CheckFileExist(string fileFullName)
         {
             if (!File.Exists(fileFullName))
-                throw new FileNotFoundException();
+                throw new FileNotFoundException(string.Format(Resources.ErrorMessages.FileNotFound, fileFullName));
         }
     }
 }

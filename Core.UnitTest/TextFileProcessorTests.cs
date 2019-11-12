@@ -1,5 +1,6 @@
 ﻿using Common.Dto;
-using Core.FilePrcossor;
+using Core.FileProcessor;
+using Core.Implementation.FileProcessor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

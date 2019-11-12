@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Dto;
+using Common.Exceptions;
 using Core.DtoValidators;
-using Core.FilePrcossor;
+using Core.FileProcessor;
 
-namespace Core
+namespace Core.Implementation
 {
     public class FileService : IFileService
     {
@@ -53,17 +54,13 @@ namespace Core
         private void CheckRootPath(string fileFullName)
         {
             if (!fileFullName.StartsWith(ROOT_FOLDER_PATH, StringComparison.OrdinalIgnoreCase))
-                throw new Exception();
+                throw new BusinessLogicException(Resources.ErrorMessages.FilesDirectoryPathInvalid);
         }
 
         private IFileProcessor GetFileProcessor(string fileFullName)
         {
             var fileExtesion = GetLastStringAfterDelimiter(fileFullName, ".");
-
-            if (!_fileProcessorFactory.TryCreate(fileExtesion, out var fileProcessor))
-                throw new Exception();
-
-            return fileProcessor;
+            return _fileProcessorFactory.Create(fileExtesion);
         }
 
         private List<FileNodeDto> BuildFilesTree(string root)

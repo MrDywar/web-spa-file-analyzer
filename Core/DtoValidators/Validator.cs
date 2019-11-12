@@ -14,7 +14,7 @@ namespace Core.DtoValidators
         {
             if (value == null)
             {
-                throw new Exception("Please ensure a model was supplied.");
+                throw new Common.Exceptions.ValidationException(Resources.ErrorMessages.NullValidationObject);
             }
 
             var validator = new TVal();
@@ -22,7 +22,7 @@ namespace Core.DtoValidators
 
             if (!result.IsValid)
             {
-                throw new Exception(result.ToString());
+                throw new Common.Exceptions.ValidationException(result.ToString());
             }
         }
     }
