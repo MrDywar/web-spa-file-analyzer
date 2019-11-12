@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using WebServer.Infrastructure;
 
 namespace WebServer.App_Start
 {
@@ -23,6 +24,8 @@ namespace WebServer.App_Start
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterWebApiFilterProvider(config);
             builder.RegisterWebApiModelBinderProvider();
+
+            builder.RegisterType<WebApiExceptionAttribute>().AsWebApiExceptionFilterForAllControllers().SingleInstance();
 
             builder.RegisterType<FileService>().As<IFileService>().SingleInstance();
             builder.RegisterType<FileProcessorFactory>().As<IFileProcessorFactory>().SingleInstance();

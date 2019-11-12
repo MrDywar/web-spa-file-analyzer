@@ -148,7 +148,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="App_Start\WebConfigConfigurationManager.cs" />
+    <Compile Include="Infrastructure\WebApiExceptionAttribute.cs" />
+    <Compile Include="Infrastructure\WebConfigConfigurationManager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\FilesController.cs" />
     <Compile Include="Global.asax.cs">
