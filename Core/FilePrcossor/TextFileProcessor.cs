@@ -59,7 +59,7 @@ namespace Core.FilePrcossor
         private static void CheckFileExist(string fileFullName)
         {
             if (!File.Exists(fileFullName))
-                throw new FileNotFoundException();
+                throw new FileNotFoundException(string.Format(Resources.ErrorMessages.FileNotFound, fileFullName));
         }
     }
 }

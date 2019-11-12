@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Exceptions;
 using Core.FilePrcossor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,7 +18,7 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetSupportedData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(GetSupportedExtensionsWithExpectedTypes), DynamicDataSourceType.Method)]
         public void Create_Supported_ReturnsProcessor(string fileExtension, Type type)
         {
             var fileProcessor = _factory.Create(fileExtension);
@@ -27,16 +28,16 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetUnsupportedData), DynamicDataSourceType.Method)]
-        public void Create_Unsupported_ThrowNotSupportedException(string fileExtension)
+        [DynamicData(nameof(GetUnsupportedExtensions), DynamicDataSourceType.Method)]
+        public void Create_Unsupported_ThrowBusinessLogicException(string fileExtension)
         {
             Action action = () => _factory.Create(fileExtension);
 
-            Assert.ThrowsException<NotSupportedException>(action);
+            Assert.ThrowsException<BusinessLogicException>(action);
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetSupportedData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(GetSupportedExtensionsWithExpectedTypes), DynamicDataSourceType.Method)]
         public void TryCreate_Supported_ReturnsProcessor(string fileExtension, Type type)
         {
             var isSuccessful = _factory.TryCreate(fileExtension, out var fileProcessor);
@@ -47,7 +48,7 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetUnsupportedData), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(GetUnsupportedExtensions), DynamicDataSourceType.Method)]
         public void TryCreate_Unsupported_ThrowNotSupportedException(string fileExtension)
         {
             var isSuccessful = _factory.TryCreate(fileExtension, out var fileProcessor);
@@ -56,12 +57,12 @@ namespace Core.UnitTest
             Assert.IsNull(fileProcessor);
         }
 
-        public static IEnumerable<object[]> GetSupportedData()
+        public static IEnumerable<object[]> GetSupportedExtensionsWithExpectedTypes()
         {
             yield return new object[] { FileProcessorFactory.TextFileExtension, typeof(TextFileProcessor) };
         }
 
-        public static IEnumerable<object[]> GetUnsupportedData()
+        public static IEnumerable<object[]> GetUnsupportedExtensions()
         {
             yield return new object[] { null };
             yield return new object[] { "" };

@@ -1,4 +1,5 @@
 ﻿using Common.Dto;
+using Common.Exceptions;
 using Core.FilePrcossor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -47,7 +48,7 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        public async Task GetData_InvalidRootPath_ThrowException()
+        public async Task GetData_InvalidRootPath_ThrowBusinessLogicException()
         {
             var parseOptions = new FileParseOptionsDto()
             {
@@ -58,29 +59,18 @@ namespace Core.UnitTest
 
             Func<Task<FileDataDto>> act = () => fileService.GetData(parseOptions);
 
-            await Assert.ThrowsExceptionAsync<Exception>(act);
+            await Assert.ThrowsExceptionAsync<BusinessLogicException>(act);
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetInvalidExtensionsFileParseOptionsDto), DynamicDataSourceType.Method)]
-        public async Task GetData_InvalidExtensions_ThrowException(FileParseOptionsDto value)
+        [DynamicData(nameof(GetFileParseOptionsDtos_Invalid), DynamicDataSourceType.Method)]
+        public async Task GetData_InvalidDto_ThrowValidationException(FileParseOptionsDto value)
         {
             var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH);
 
             Func<Task<FileDataDto>> act = () => fileService.GetData(value);
 
-            await Assert.ThrowsExceptionAsync<Exception>(act);
-        }
-
-        [TestMethod]
-        [DynamicData(nameof(GetInvalidFileParseOptionsDto), DynamicDataSourceType.Method)]
-        public async Task GetData_InvalidDto_ThrowException(FileParseOptionsDto value)
-        {
-            var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH);
-
-            Func<Task<FileDataDto>> act = () => fileService.GetData(value);
-
-            await Assert.ThrowsExceptionAsync<Exception>(act);
+            await Assert.ThrowsExceptionAsync<ValidationException>(act);
         }
 
         [TestMethod]
@@ -100,8 +90,7 @@ namespace Core.UnitTest
             var fileProcessor = new Mock<IFileProcessor>();
 
             fileProcessor.Setup(x => x.Read(parseOptions)).Returns(Task.FromResult(expectedData));
-            IFileProcessor fp = fileProcessor.Object;
-            fileProcFactory.Setup(x => x.TryCreate("txt", out fp)).Returns(true);
+            fileProcFactory.Setup(x => x.Create("txt")).Returns(fileProcessor.Object);
 
             var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH, fileProcFactory.Object);
 
@@ -111,44 +100,33 @@ namespace Core.UnitTest
         }
 
         [TestMethod]
-        public async Task UpdateData_InvalidRootPath_ThrowException()
-        {
-            var fileData = new FileDataDto() { FullName = @"C:\text.txt" };
-            var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH);
-
-            Func<Task> act = () => fileService.UpdateData(fileData);
-
-            await Assert.ThrowsExceptionAsync<Exception>(act);
-        }
-
-        [TestMethod]
-        public async Task UpdateData_NotSupportedFileExtension_ThrowException()
+        public async Task UpdateData_InvalidRootPath_ThrowBusinessLogicException()
         {
             var fileData = new FileDataDto()
             {
-                FullName = $"{TEST_ROOT_FOLDER_PATH}\\text.txgdsgdsgdst",
+                FullName = @"C:\text.txt",
+                Headers = new List<string>() { "test" }
             };
-
             var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH);
 
             Func<Task> act = () => fileService.UpdateData(fileData);
 
-            await Assert.ThrowsExceptionAsync<Exception>(act);
+            await Assert.ThrowsExceptionAsync<BusinessLogicException>(act);
         }
 
         [TestMethod]
-        [DynamicData(nameof(GetInvalidFileDataDto), DynamicDataSourceType.Method)]
-        public async Task UpdateData_InvalidDto_ThrowException(FileDataDto value)
+        [DynamicData(nameof(GetFileDataDtos_Invalid), DynamicDataSourceType.Method)]
+        public async Task UpdateData_InvalidDto_ThrowValidationException(FileDataDto value)
         {
             var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH);
 
             Func<Task> act = () => fileService.UpdateData(value);
 
-            await Assert.ThrowsExceptionAsync<Exception>(act);
+            await Assert.ThrowsExceptionAsync<ValidationException>(act);
         }
 
         [TestMethod]
-        public async Task UpdateData_ValidFile_ReturnsTask()
+        public async Task UpdateData_ValidFile_UpdateCalledOnFileProcessor()
         {
             var fileData = new FileDataDto()
             {
@@ -159,8 +137,7 @@ namespace Core.UnitTest
             var fileProcFactory = new Mock<IFileProcessorFactory>();
             var fileProcessor = new Mock<IFileProcessor>();
 
-            IFileProcessor fp = fileProcessor.Object;
-            fileProcFactory.Setup(x => x.TryCreate("txt", out fp)).Returns(true);
+            fileProcFactory.Setup(x => x.Create("txt")).Returns(fileProcessor.Object);
             var fileService = CreateFileService(TEST_ROOT_FOLDER_PATH, fileProcFactory.Object);
 
             await fileService.UpdateData(fileData);
@@ -220,20 +197,7 @@ namespace Core.UnitTest
             return true;
         }
 
-        public static IEnumerable<object[]> GetInvalidExtensionsFileParseOptionsDto()
-        {
-            yield return new object[] {
-                new FileParseOptionsDto() { FullName = $"{TEST_ROOT_FOLDER_PATH}\\t" }
-            };
-            yield return new object[] {
-                new FileParseOptionsDto() { FullName = $"{TEST_ROOT_FOLDER_PATH}\\t.zzzzzz" }
-            };
-            yield return new object[] {
-                new FileParseOptionsDto() { FullName = $"{TEST_ROOT_FOLDER_PATH}\\t....." }
-            };
-        }
-
-        public static IEnumerable<object[]> GetInvalidFileParseOptionsDto()
+        public static IEnumerable<object[]> GetFileParseOptionsDtos_Invalid()
         {
             yield return new object[] { null };
             yield return new object[] {
@@ -241,7 +205,7 @@ namespace Core.UnitTest
             };
         }
 
-        public static IEnumerable<object[]> GetInvalidFileDataDto()
+        public static IEnumerable<object[]> GetFileDataDtos_Invalid()
         {
             yield return new object[] { null };
             yield return new object[] {
