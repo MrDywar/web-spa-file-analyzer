@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "d1b94aa6-1ac8-4a8f-aebd-cefa67fe834a",
+		"name": "FileParser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetFiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{siteUrl}}/api/files",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ParseFile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"\",\n    \"hasHeaders\": true,\n    \"delimiter\": \"\\t\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/files/parse",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"files",
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"\",\n    \"delimiter\": \"\\t\",\n    \"headers\": [\n        \"Name\",\n        \"Site\",\n        \"Email\"\n    ],\n    \"rows\": [\n        [\n            \"Betty J. Brown\",\n            \"OEMJobs.com\",\n            \"BettyJBrown@armyspy.com\"\n        ],\n        [\n            \"John D. Ginter\",\n            \"keepclicker.com\",\n            \"JohnDGinter@rhyta.com\"\n        ]\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/files/update",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"files",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
