@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Hosting;
 
-namespace WebServer.App_Start
+namespace WebServer.Infrastructure
 {
     public class WebConfigConfigurationManager : IConfigurationManager
     {
