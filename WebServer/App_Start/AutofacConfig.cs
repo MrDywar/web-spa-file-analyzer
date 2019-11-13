@@ -25,7 +25,7 @@ namespace WebServer.App_Start
             builder.RegisterWebApiFilterProvider(config);
             builder.RegisterWebApiModelBinderProvider();
 
-            builder.RegisterType<WebApiExceptionAttribute>().AsWebApiExceptionFilterForAllControllers().SingleInstance();
+            builder.RegisterType<WebApiExceptionFilter>().AsWebApiExceptionFilterForAllControllers().SingleInstance();
 
             builder.RegisterType<FileService>().As<IFileService>().SingleInstance();
             builder.RegisterType<FileProcessorFactory>().As<IFileProcessorFactory>().SingleInstance();

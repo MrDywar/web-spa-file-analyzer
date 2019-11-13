@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.UnitTest", "Core.UnitTest\Core.UnitTest.csproj", "{92C80BB7-CC47-4697-982C-E41831F6BD6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServerCore", "WebServerCore\WebServerCore.csproj", "{28495AAB-DEE2-4121-81E1-51977EC6ADC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServerCore", "WebServerCore\WebServerCore.csproj", "{28495AAB-DEE2-4121-81E1-51977EC6ADC3}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ClientWebApp", "ClientWebApp\", "{9E40292F-9541-4D6A-985A-AD6C5F29A1E6}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -33,6 +33,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ClientWebApp", "ClientWebAp
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "51277"
+		SlnRelativePath = "ClientWebApp\"
 	EndProjectSection
 EndProject
 Global

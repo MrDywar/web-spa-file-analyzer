@@ -13,7 +13,7 @@ using System.Web.Http.Filters;
 
 namespace WebServer.Infrastructure
 {
-    public class WebApiExceptionAttribute : IAutofacExceptionFilter
+    public class WebApiExceptionFilter : IAutofacExceptionFilter
     {
         public Task OnExceptionAsync(HttpActionExecutedContext context, CancellationToken cancellationToken)
         {
