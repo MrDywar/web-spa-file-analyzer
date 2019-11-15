@@ -1,0 +1,17 @@
+Develop an ASP.NET MVC C # application.
+The application should be implemented as (Single Page Application)
+Use AJAX Technology
+At least minimal design is welcome
+
+Implement a one-page application for reading tabular data from a text file. The main application window is divided into two columns.
+
+The first column contains the information necessary to read data from a file:
+- The path to the file located on the server.
+- Button to select a file located on the server. The file selection button brings up a pop-up window with the file structure of a specific folder on the server with the ability to select a file.
+- Indicates whether the file contains a column description line. If the sign “whether the column description line is contained in the file” is false, the column names are filled with default values (for example, col_1, col_2, _col_3, etc.).
+- Separator. The character used in the file as a column separator.
+- "Read data" button. When the button is pressed, data from the file is serialized and on their basis the data display column is filled.
+
+The second column displays the data read from the file in two tables.
+The first table contains rows with column names. Realize the possibility of renaming columns with saving the results to a file selected in column 1 of the application. Renamed columns affect the display of the column headers of the second table.
+The second table contains data from the table cells. Implement the ability to edit table cells with saving the results to a file selected in column 1 of the application. Implement the ability to add rows to the table.
