@@ -11,7 +11,10 @@ namespace Core.Implementation.FileProcessor
 {
     public class TextFileProcessor : IFileProcessor
     {
-        public Task<FileDataDto> Read(FileParseOptionsDto parseOptions)
+        private const int DefaultBufferSize = 4096;
+        private const FileOptions DefaultOptions = FileOptions.Asynchronous | FileOptions.SequentialScan;
+
+        public async Task<FileDataDto> Read(FileParseOptionsDto parseOptions)
         {
             CheckFileExist(parseOptions.FullName);
 
@@ -21,11 +24,18 @@ namespace Core.Implementation.FileProcessor
                 Delimiter = parseOptions.Delimiter
             };
 
-            foreach (string line in File.ReadLines(parseOptions.FullName, Encoding.Default))
-                result.Rows.Add(line.Split(new string[] { parseOptions.Delimiter }, StringSplitOptions.None));
+            using (var stream = new FileStream(parseOptions.FullName, FileMode.Open, FileAccess.Read, FileShare.Read, DefaultBufferSize, DefaultOptions))
+            using (var reader = new StreamReader(stream, Encoding.Default))
+            {
+                string line;
+                while ((line = await reader.ReadLineAsync()) != null)
+                {
+                    result.Rows.Add(line.Split(new string[] { parseOptions.Delimiter }, StringSplitOptions.None));
+                }
+            }
 
             if (result.Rows.Count == 0)
-                return Task.FromResult(result);
+                return result;
 
             if (parseOptions.HasHeaders)
             {
@@ -38,7 +48,7 @@ namespace Core.Implementation.FileProcessor
                 result.Headers.AddRange(Enumerable.Range(0, maxColumnsCount).Select(x => $"col_{x}"));
             }
 
-            return Task.FromResult(result);
+            return result;
         }
 
         public async Task Update(FileDataDto fileData)
